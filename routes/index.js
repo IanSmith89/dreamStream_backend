@@ -20,24 +20,23 @@ USERS
 *****/
 
 router.post('/signup', function(req, res, next) {
-  // var newUser = req.body;
-  var newUser = {
-    email: 'check@gmail.com',
-    password: 'password',
-    firstName: 'check',
-    lastName: 'Hohn'
-  };
+  // var newUser = {
+  //   email: 'check@gmail.com',
+  //   password: 'password',
+  //   firstName: 'check',
+  //   lastName: 'Hohn'
+  // };
   var dreamData;
-  var dreamData = {
-    dateTime: '2016-01-28 20:40:23-07',
-    content: 'dream content check',
-    mood: 1,
-    rating: 1,
-    duration: 1
-  };
+  // var dreamData = {
+  //   dateTime: '2016-01-28 20:40:23-07',
+  //   content: 'dream content check',
+  //   mood: 1,
+  //   rating: 1,
+  //   duration: 1
+  // };
 
-
-  hashPassword(newUser, registerUser);
+  var user = req.body;
+  hashPassword(user, registerUser);
 
   function registerUser(user){
     knex('users').insert({
@@ -45,10 +44,6 @@ router.post('/signup', function(req, res, next) {
       password: user.password,
       firstName: user.firstName,
       lastName: user.lastName
-      // email: req.body.email,
-      // password: req.body.password,
-      // firstName: req.body.firstName,
-      // lastName: req.body.lastName
     })
     .then(function(data, err){
       if(!checkErr(res, err)){
