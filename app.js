@@ -31,8 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 var secret = 'ChangeThis'; // use dotenv.
 
 
-app.use('/dreams', jwt({secret:secret}));
-app.use('/filters', jwt({secret:secret}));
+app.use('/dreams', jwt({secret:secret}), dreams);
+app.use('/filters', jwt({secret:secret}), filters);
 app.use('/', routes);
 //app.use('/users', users);
 
