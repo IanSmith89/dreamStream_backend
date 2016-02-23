@@ -3,33 +3,91 @@ var router = express.Router();
 
 var knex = require('../db/knex');
 
+function checkErr(res, err)
+{
+  var fail = false;
+  if(err)
+  {
+    fail = true;
+    res.send(err);
+  }
+  return fail;
+}
+
 /*****
 DREAMS
 *****/
 
-router.get('/dreams', function(req, res, next) {
-  //Get all data for a single user dreams.
-  res.end('End');
+router.get('/', function(req, res, next) {
+  //Get all data for a single user's dreams.
+  knex('dreams').where({user_id : req.user.id})
+  .then(function(err, data){
+    if(!checkErr(res, err))
+    {
+      res.json(data);
+    }
+  });
 });
 
-router.get('/dreams/:dreamID', function(req, res, next) {
+router.get('/:dreamID', function(req, res, next) {
   //Get all data for a single dream.
-  res.end('End');
+  knex('dreams').where({user_id : req.user.id, id : req.params.dreamID})
+  .then(function(err, data){
+    if(!checkErr(res, err))
+    {
+      res.json(data);
+    }
+  });
 });
 
-router.post('/dreams', function(req, res, next) {
+router.post('/', function(req, res, next) {
   //Build a new dream associated with a user.
-  res.end('End');
+  var date = new Date();
+  knex('dreams').insert(
+    {
+      user_id: req.user.id,
+      dateTime: date,
+      content: req.body.content,
+      mood: req.body.mood,
+      rating: req.body.rating,
+      duration: req.body.duration
+    })
+  .then(function(err, data){
+    if(!checkErr(res, err))
+    {
+      res.send('success');
+    }
+  });
 });
 
-router.delete('/dreams/:dreamID', function(req, res, next) {
+router.delete('/:dreamID', function(req, res, next) {
   //Delete a dream associated with a user.
-  res.end('End');
+  knex('dreams').where({user_id : req.params.dreamID}).del()
+  .then(function(err, data){
+    if(!checkErr(res, err))
+    {
+      res.send('success');
+    }
+  });
 });
 
-router.post('/dreams/:dreamID', function(req, res, next) {
+router.post('/:dreamID', function(req, res, next) {
   //Edit a dream associated with a user.
-  res.end('End');
+  knex('dreams').update(
+    {
+      user_id: req.user.id,
+      content: req.body.content,
+      mood: req.body.mood,
+      rating: req.body.rating,
+      duration: req.body.duration
+    })
+  .where({id : req.params.dreamID})
+  .then(function(err, data){
+    if(!checkErr(res, err))
+    {
+      res.send('success');
+    }
+  });
 });
 
 
