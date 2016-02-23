@@ -20,7 +20,7 @@ FILTERS
 router.get('/all', function(req, res, next) {
   //Get all filters associated with a user including defaults.
   knex('filters').where({user_id : -1}).orWhere({user_id : req.user.id})
-  .then(function(err, data) {
+  .then(function(data, err) {
     if(!checkErr(res, err)) {
       res.json(data);
     }
@@ -30,7 +30,7 @@ router.get('/all', function(req, res, next) {
 router.get('/specific', function(req, res, next) {
   //Get specific filters associated with a user.
   knex('filters').where({user_id : req.user.id})
-  .then(function(err, data) {
+  .then(function(data, err) {
     if(!checkErr(res, err)) {
       res.json(data);
     }
@@ -43,7 +43,7 @@ router.post('/', function(req, res, next) {
     user_id: req.user.id,
     phrase: req.body.content
   })
-  .then(function(err, data) {
+  .then(function(data, err) {
     if(!checkErr(res, err)) {
       res.send('success');
     }
@@ -53,7 +53,7 @@ router.post('/', function(req, res, next) {
 router.delete('/specific/:filterID', function(req, res, next) {
   //Delete a filter associated with a user.
   knex('filters').where({id : req.params.filterID}).del()
-  .then(function(err, data) {
+  .then(function(data, err) {
     if(!checkErr(res, err)) {
       res.send('success');
     }

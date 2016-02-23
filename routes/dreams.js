@@ -21,7 +21,7 @@ DREAMS
 router.get('/', function(req, res, next) {
   //Get all data for a single user's dreams.
   knex('dreams').where({user_id : req.user.id})
-  .then(function(err, data){
+  .then(function(data, err) {
     if(!checkErr(res, err))
     {
       res.json(data);
@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 router.get('/:dreamID', function(req, res, next) {
   //Get all data for a single dream.
   knex('dreams').where({user_id : req.user.id, id : req.params.dreamID})
-  .then(function(err, data){
+  .then(function(data, err) {
     if(!checkErr(res, err))
     {
       res.json(data);
@@ -52,7 +52,7 @@ router.post('/', function(req, res, next) {
       rating: req.body.rating,
       duration: req.body.duration
     })
-  .then(function(err, data){
+  .then(function(data, err) {
     if(!checkErr(res, err))
     {
       res.send('success');
@@ -63,7 +63,7 @@ router.post('/', function(req, res, next) {
 router.delete('/:dreamID', function(req, res, next) {
   //Delete a dream associated with a user.
   knex('dreams').where({user_id : req.params.dreamID}).del()
-  .then(function(err, data){
+  .then(function(data, err) {
     if(!checkErr(res, err))
     {
       res.send('success');
@@ -82,7 +82,7 @@ router.post('/:dreamID', function(req, res, next) {
       duration: req.body.duration
     })
   .where({id : req.params.dreamID})
-  .then(function(err, data){
+  .then(function(data, err) {
     if(!checkErr(res, err))
     {
       res.send('success');
