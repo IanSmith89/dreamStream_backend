@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var jwt = require('express-jwt');
 var jsonWebToken = require('jsonwebtoken');
 
+var cors = require('cors');
 
 var routes = require('./routes/index');
 var dreams = require('./routes/dreams');
@@ -28,8 +29,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var secret = 'ChangeThis'; // use dotenv.
+var corsOptions = {
+  origin: 'http://localhost:8100'
+};
+app.use(cors(corsOptions));
 
+var secret = 'ChangeThis'; // use dotenv.
 
 app.use('/dreams', jwt({secret:secret}), dreams);
 app.use('/filters', jwt({secret:secret}), filters);
