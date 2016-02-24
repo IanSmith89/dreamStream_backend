@@ -26,14 +26,14 @@ router.post('/signup', function(req, res, next) {
   //   firstName: 'check',
   //   lastName: 'Hohn'
   // };
-  var dreamData;
-  // var dreamData = {
-  //   dateTime: '2016-01-28 20:40:23-07',
-  //   content: 'dream content check',
-  //   mood: 1,
-  //   rating: 1,
-  //   duration: 1
-  // };
+  //var dreamData;
+  var dreamData = {
+    dateTime: '2016-01-28 20:40:23-07',
+    content: 'dream content check',
+    mood: 1,
+    rating: 1,
+    duration: 1
+  };
 
   var user = req.body;
   hashPassword(user, registerUser);
@@ -45,15 +45,19 @@ router.post('/signup', function(req, res, next) {
       firstName: user.firstName,
       lastName: user.lastName
     })
+    .returning('id')
     .then(function(data, err){
       if(!checkErr(res, err)){
         if(dreamData){
-          knex('users').where({email: user.email, firstName: user.firstName, lastName: user.lastName})
-          .then(function(dataUser, err){
-            if(!checkErr(res, err)){
-                registerDream(dataUser[0].id, res);
-              }
-          });
+          try{
+            registerDream(parseInt(data), res);
+          }
+          catch(e){
+            console.log(e);
+          }
+        }
+        else {
+          res.send('success');
         }
       }
     });
