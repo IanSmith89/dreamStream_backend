@@ -92,21 +92,25 @@ router.post('/signin', function(req, res, next) {
   knex('users').first().where({
     email: req.body.email
   }).then(function(data, err){
-    if(!checkErr(res, err)){
-      bcrypt.compare(req.body.password, data.password, function(err, match){
-        if(match){
-          var user = data;
-          delete user.password;
-          var expires = {
-            expiresInMinutes : 1600
-          };
-          var token = jsonWebToken.sign(user, secret, expires);
-          res.json({token : token});
-          // res.end('End');
-        } else {
-          res.send('failed to authenicate');
-        }
-      });
+    if(data.length === 0) {
+      res.send('failed to authenicate');
+    } else {
+      if(!checkErr(res, err)){
+        bcrypt.compare(req.body.password, data.password, function(err, match){
+          if(match){
+            var user = data;
+            delete user.password;
+            var expires = {
+              expiresInMinutes : 1600
+            };
+            var token = jsonWebToken.sign(user, secret, expires);
+            res.json({token : token});
+            // res.end('End');
+          } else {
+            res.send('failed to authenicate');
+          }
+        });
+      }
     }
   });
 });

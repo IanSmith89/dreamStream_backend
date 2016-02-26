@@ -1,15 +1,16 @@
 // Update with your config settings.
+require('dotenv').load();
 
 module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost:5432/dreamstream'
+    connection: process.env.DATABASE_URL + '?ssl=true'
   },
 
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL
+    connection: process.env.DATABASE_URL + '?ssl=true'
   }
 
 };
