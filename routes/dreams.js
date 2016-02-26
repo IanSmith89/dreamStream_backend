@@ -1,7 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var watson = require('watson-developer-cloud');
 
 var knex = require('../db/knex');
+/********************
+WATSON DETAILS
+// var details = { // This is Watson -Text to Speech details
+//     "username": "df7a2f77-b70e-4f29-8b5f-560bf0db4677",
+//     "password": "xrIrOf7FZOOp"
+// };
+
+var details = {
+  "username": "fa725cd9-a470-432e-b282-fa39bbac5ce9",
+  "password": "xfh4qqYyl7k0"
+};
+*********************/
 
 function checkErr(res, err)
 {
