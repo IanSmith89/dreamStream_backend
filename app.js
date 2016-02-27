@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var corsOptions = {
-  origin: 'http://localhost:8100'
+  origin: '*'
 };
 app.use(cors(corsOptions));
 
