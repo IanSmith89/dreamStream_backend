@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var jsonWebToken = require('jsonwebtoken');
 var router = express.Router();
@@ -29,10 +31,10 @@ router.post('/signup', function(req, res, next) {
   //var dreamData;
   var dreamData = {
     dateTime: '2016-01-28 20:40:23-07',
-    content: 'dream content check',
-    mood: 1,
-    rating: 1,
-    duration: 1
+    content: 'This is where your dreams will be. Farm-to-table brunch single-origin coffee poutine. Sartorial pitchfork hoodie, listicle skateboard offal brunch street art pug try-hard occupy sustainable +1. Kickstarter literally brooklyn, normcore cred cardigan ennui. VHS mixtape banh mi affogato paleo meh humblebrag vegan. Man bun banh mi art party next level kitsch. Pour-over shabby chic crucifix, kitsch tote bag migas cronut vegan humblebrag tousled chillwave normcore listicle DIY. Chartreuse brooklyn kinfolk, everyday carry ugh iPhone crucifix skateboard offal beard pabst fixie.',
+    mood: 3,
+    rating: 5,
+    duration: 4
   };
 
   var user = req.body;
