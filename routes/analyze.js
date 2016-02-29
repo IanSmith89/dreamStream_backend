@@ -9,10 +9,13 @@ WATSON DETAILS
 //     "username": "df7a2f77-b70e-4f29-8b5f-560bf0db4677",
 //     "password": "xrIrOf7FZOOp"
 // };
+//***** >> OLD personaility
+"username": "fa725cd9-a470-432e-b282-fa39bbac5ce9",
+"password": "xfh4qqYyl7k0"
 *********************/
 var details = {
-  "username": "fa725cd9-a470-432e-b282-fa39bbac5ce9",
-  "password": "xfh4qqYyl7k0"
+  "username": "72d72eeb-5160-40dc-af32-f7f481d679a4",
+  "password": "OgC54ZMt8D7W"
 };
 
 
