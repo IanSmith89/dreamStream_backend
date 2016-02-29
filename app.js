@@ -13,6 +13,7 @@ var cors = require('cors');
 var routes = require('./routes/index');
 var dreams = require('./routes/dreams');
 var filters = require('./routes/filters');
+var analyze = require('./routes/analyze');
 //var users = require('./routes/users');
 
 var app = express();
@@ -38,6 +39,7 @@ var secret = 'ChangeThis'; // use dotenv.
 
 app.use('/dreams', jwt({secret:secret}), dreams);
 app.use('/filters', jwt({secret:secret}), filters);
+app.use('/analyze', jwt({secret:secret}), analyze);
 app.use('/', routes);
 //app.use('/users', users);
 
